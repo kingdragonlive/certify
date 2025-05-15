@@ -1,0 +1,58 @@
+<!-- public.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <?!= include('styles'); ?>
+</head>
+<body>
+  <div class="header">
+    <h1>โครงสร้างองค์กรบริษัท</h1>
+    <p>การทำงานเป็นทีมคือหัวใจของความสำเร็จ</p>
+  </div>
+  
+  <div class="container">
+    <div class="org-structure">
+      <!-- ระดับ CEO -->
+      <div class="top-level">
+        <div class="ceo-card floating">
+          <img src="<?= organization.ceo.photo ?>" alt="CEO" class="ceo-photo">
+          <h2 class="ceo-name"><?= organization.ceo.name ?></h2>
+          <p class="ceo-title"><?= organization.ceo.title ?></p>
+        </div>
+      </div>
+      
+      <div class="connector-line"></div>
+      
+      <!-- แผนกต่างๆ -->
+      <div class="departments-container" id="departmentsContainer">
+        <? for (let i = 0; i < organization.departments.length; i++) { ?>
+          <? const dept = organization.departments[i]; ?>
+          <div class="department">
+            <div class="department-header">
+              <h3 class="department-name"><?= dept.name ?></h3>
+              <p class="department-manager">ผู้จัดการ: <?= dept.manager ?></p>
+            </div>
+            <div class="positions-list">
+              <? for (let j = 0; j < dept.positions.length; j++) { ?>
+                <? const pos = dept.positions[j]; ?>
+                <div class="position-card">
+                  <img src="<?= pos.photo ?>" alt="<?= pos.employee ?>" class="employee-photo">
+                  <div class="position-info">
+                    <h4 class="position-name"><?= pos.name ?></h4>
+                    <p class="employee-name"><?= pos.employee ?></p>
+                  </div>
+                </div>
+              <? } ?>
+            </div>
+          </div>
+        <? } ?>
+      </div>
+    </div>
+  </div>
+  
+  <div class="watermark">
+    &copy; <?= new Date().getFullYear() ?> บริษัทของเรา. All Rights Reserved.
+  </div>
+</body>
+</html>
